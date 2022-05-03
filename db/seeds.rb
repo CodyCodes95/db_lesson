@@ -6,7 +6,6 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Book.destroy_all
 Author.destroy_all
 
 jk = Author.create(first_name: "JK", last_name: "Rowling")
@@ -19,6 +18,9 @@ clarke.books.create(title: "2001: A Space Odyssey")
 clarke.books.create(title: "A Fall of Moondust")
 asimov.books.create(title: "Foundation")
 asimov.books.create(title: "I, Robot")
+
+puts "Authors: #{Author.count}"
+puts "Books: #{Book.count}"
 
 # Book.destroy_all
 

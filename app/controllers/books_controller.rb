@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :find_book, only: %i[show update destroy, edit] # , except: [:index, create]
+  before_action :find_book, only: [:show, :update, :destroy, :edit]
   before_action :set_authors, only: [:new, :edit]
 
   def index
