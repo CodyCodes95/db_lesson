@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :books #, except: [:index]
   # get 'books', to: 'books#index'
   # get 'books/new', to: 'books#new'

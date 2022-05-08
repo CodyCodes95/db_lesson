@@ -12,6 +12,15 @@
     4. The attribute in the collection items to use as the caption of the option %>
     <%= f.collection_select :author_id, @authors, :id, :full_name %>
 </fieldset>
+<fieldset class="mb-2">
+    <%= f.label :cover %>
+    <%= f.file_field :cover %>
+</fieldset>
+<% if @book.cover.attached? %>
+<fieldset class="mb-2">
+    <%= cl_image_tag @book.cover.key, transformation: ["media_lib_thumb"], cloud_name: 'codycodes' %>
+</fieldset>
+<%end%>
 <fieldset>
     <%= f.submit class: 'btn btn-outline-primary' %>
 </fieldset>

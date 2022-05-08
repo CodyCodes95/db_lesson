@@ -1,5 +1,6 @@
-<h1>Books
-<%= link_to 'New Book', new_book_path, class: "btn btn-primary" %>
+<h1>
+    Books
+    <%= user_signed_in? && policy(Book).new? ? link_to('New Book', new_book_path, class: "btn btn-primary") : '' %>
 </h1>
 <% @books.each do |book| %>
     <p> <%= link_to book.title, book %> by <%= book.author.full_name %> </p>

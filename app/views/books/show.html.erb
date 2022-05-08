@@ -1,7 +1,12 @@
  <h1> <%= @book.title %> </h1> 
 <h3> By <%= @book.author.full_name %> </h3>
 
+<%= cl_image_tag @book.cover.key, crop:'scale', width: 150, cloud_name: 'codycodes' if @book.cover.attached? %>
+
 <div class="btn-toolbar">
-<%= link_to 'Edit', edit_book_path(@book), class: "btn btn-warning me-2" %>
-<%= button_to 'Delete', @book, method: :delete, form: { data: { turbo_confirm: "Are you sure you want to delete '#{@book.title}' ?" }}, class: "btn btn-danger" %>
+
+<% if policy(@book).edit_or_destroy? %>
+<%= link_to('Edit', edit_book_path(@book), class: "btn btn-warning me-2") if policy(@book).update? %>
+<%= button_to('Delete', @book, method: :delete, form: { data: { turbo_confirm: "Are you sure you want to delete '#{@book.title}' ?" }}, class: "btn btn-danger") if policy(@book).destroy? %>
+<% end %>
 </div>

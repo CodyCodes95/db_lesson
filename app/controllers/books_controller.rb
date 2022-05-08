@@ -1,6 +1,8 @@
 class BooksController < ApplicationController
-  before_action :find_book, only: [:show, :update, :destroy, :edit]
-  before_action :set_authors, only: [:new, :edit]
+  before_action :authenticate_user!, except: %i[index show]
+  before_action :check_auth
+  before_action :find_book, only: %i[show update destroy edit]
+  before_action :set_authors, only: %i[new edit]
 
   def index
     @books = Book.all
@@ -22,8 +24,7 @@ class BooksController < ApplicationController
     redirect_to book
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @book.update(book_params)
@@ -31,11 +32,17 @@ class BooksController < ApplicationController
   end
 
   def destroy
+    @book.cover.purge
     @book.destroy
     redirect_to books_path
+    # TEST
   end
 
   private
+
+  def check_auth
+    authorize Book
+  end
 
   def find_book
     @book = Book.find(params[:id])
@@ -46,6 +53,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    return params.require(:book).permit(:title, :author_id)
+    return params.require(:book).permit(:title, :author_id, :cover)
   end
 end
