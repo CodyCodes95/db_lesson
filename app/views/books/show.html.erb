@@ -1,7 +1,7 @@
  <h1> <%= @book.title %> </h1> 
 <h3> By <%= @book.author.full_name %> </h3>
 
-<%= cl_image_tag @book.cover.key, crop:'scale', width: 150, cloud_name: 'codycodes' if @book.cover.attached? %>
+<%= cl_image_tag @book.cover.key, crop:'scale', width: 150, cloud_name: ENV['CLOUDINARY_CLOUD_NAME'] if @book.cover.attached? %>
 
 <div class="btn-toolbar">
 

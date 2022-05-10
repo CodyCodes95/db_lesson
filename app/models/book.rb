@@ -5,4 +5,6 @@ class Book < ApplicationRecord
     has_many :genres, through: :book_genres
 
     has_one_attached :cover
+
+    validates :title, presence: true, length: {in:2..100}
 end
